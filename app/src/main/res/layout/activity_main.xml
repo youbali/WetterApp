@@ -171,8 +171,8 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/feuchtigkeit">
 
                     </ImageView>
@@ -183,14 +183,6 @@
 
                     </Space>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Feuchtigkeit"
-                        android:textColor="#fff"
-                        android:textSize="15sp">
-
-                    </TextView>
 
                     <TextView
                         android:id="@+id/feucht"
@@ -220,8 +212,8 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/regen">
 
                     </ImageView>
@@ -232,14 +224,6 @@
 
                     </Space>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Regen"
-                        android:textColor="#fff"
-                        android:textSize="15sp">
-
-                    </TextView>
 
                     <TextView
                         android:id="@+id/regen"
@@ -269,8 +253,8 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/wind"
                         app:tint="#fff">
 
@@ -282,14 +266,6 @@
 
                     </Space>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Wind"
-                        android:textColor="#fff"
-                        android:textSize="15sp">
-
-                    </TextView>
 
                     <TextView
                         android:id="@+id/wind"
