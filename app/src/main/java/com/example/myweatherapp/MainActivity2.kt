@@ -1,11 +1,6 @@
 package com.example.myweatherapp
 
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,8 +10,13 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.lang.Exception
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -48,6 +48,7 @@ class MainActivity2 : AppCompatActivity() {
 
     }//fun onCreate
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun fetchDataAndHandle(city: String) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -59,11 +60,13 @@ class MainActivity2 : AppCompatActivity() {
                 handleNetworkError()
             }
         }
+
     }
 
     private fun fetchData(city: String): String {
         try {
-            val urlString = "https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$apiKey"
+            val urlString =
+                "https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$apiKey"
             Log.d("MainActivity2", "fetchData URL: $urlString") //log * print
             val result = URL(urlString).readText(Charsets.UTF_8)
             Log.d("MainActivity2", "fetchData result: $result")
@@ -87,11 +90,13 @@ class MainActivity2 : AppCompatActivity() {
                 "Aktualisiert am: " + SimpleDateFormat("dd.MM.yyyy hh:mm a", Locale.ENGLISH).format(
                     Date(updatedAt * 1000)
                 )
-            val temp = main.getString("temp").toFloat().toInt().toString() + "°C"
-            val tempMin = "Min Temp: " + main.getString("temp_min").toFloat().toInt().toString() + "°C"
-            val tempMax = "Max Temp: " + main.getString("temp_max").toFloat().toInt().toString() + "°C"
-            val humidity = main.getString("humidity")+"%"
-            val windSpeed = wind.getString("speed")+"km/h"
+            val temp = jsonObj.getString("Ta").toFloat().toInt().toString() + "°C"
+            val tempMin =
+                "Min Temp: " + main.getString("temp_min").toFloat().toInt().toString() + "°C"
+            val tempMax =
+                "Max Temp: " + main.getString("temp_max").toFloat().toInt().toString() + "°C"
+            val humidity = main.getString("humidity") + "%"
+            val windSpeed = wind.getString("speed") + "km/h"
             val weatherDescription = weather.getString("description")
             val address = jsonObj.getString("name") + ", " + sys.getString("country")
 

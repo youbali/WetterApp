@@ -11,11 +11,12 @@
 
     <LinearLayout
         android:id="@+id/search_bar"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <EditText
             android:id="@+id/city_input"
             android:layout_width="250dp"
@@ -23,19 +24,19 @@
             android:padding="10sp"
             android:textSize="22sp"
             android:background="#fff"
-            android:hint="Stadt eingaben"
-            />
+            android:hint="Stadt eingaben" />
         <Space
             android:layout_width="10dp"
             android:layout_height="wrap_content"></Space>
+
         <Button
             android:id="@+id/suchen"
-            android:text="Suchen"
-            android:padding="10sp"
-            android:textSize="14sp"
-            android:background="#99edc3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#99edc3"
+            android:padding="10sp"
+            android:text="Suchen"
+            android:textSize="14sp">
 
         </Button>
     </LinearLayout>
