@@ -90,7 +90,7 @@ class MainActivity2 : AppCompatActivity() {
                 "Aktualisiert am: " + SimpleDateFormat("dd.MM.yyyy hh:mm a", Locale.ENGLISH).format(
                     Date(updatedAt * 1000)
                 )
-            val temp = jsonObj.getString("Ta").toFloat().toInt().toString() + "°C"
+            val temp = main.getString("temp").toFloat().toInt().toString() +"°C"
             val tempMin =
                 "Min Temp: " + main.getString("temp_min").toFloat().toInt().toString() + "°C"
             val tempMax =
