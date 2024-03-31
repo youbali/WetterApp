@@ -27,14 +27,14 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var cityInput: EditText
     private lateinit var button: Button
 
-    private val apiKey: String = "11e94ab942a5ebae73d6de6b4b8de110"
+    private val apiKey: String = "8ed3soydmUpbSSIbxYgb9hW6THyHsoCE"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         cityInput = findViewById(R.id.city_input)
         button = findViewById(R.id.suchen)
-
+//City-input und Button werden bei findViewById geholt
 
 
         button.setOnClickListener {
@@ -66,7 +66,7 @@ class MainActivity2 : AppCompatActivity() {
     private fun fetchData(city: String): String {
         try {
             val urlString =
-                "https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$apiKey"
+                "https://api.tomorrow.io/v4/weather/forecast?location=$city&timesteps=1d&apikey=$apiKey"
             Log.d("MainActivity2", "fetchData URL: $urlString") //log * print
             val result = URL(urlString).readText(Charsets.UTF_8)
             Log.d("MainActivity2", "fetchData result: $result")
@@ -81,8 +81,12 @@ class MainActivity2 : AppCompatActivity() {
         try {
             Log.d("MainActivity2", "handleWeatherData called with result: $result")
             val jsonObj = JSONObject(result)
-            val main = jsonObj.getJSONObject("main")
-            val sys = jsonObj.getJSONObject("sys")
+            val timelines = jsonObj.getJSONObject("timelines")
+            val daily = timelines.getJSONArray("daily")
+            val today = daily.getJSONObject(0)
+            val time = today.getString("time")
+            Log.d("MainActivity2", "today: $time")
+            /*
             val wind = jsonObj.getJSONObject("wind")
             val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
             val updatedAt: Long = jsonObj.getLong("dt")
@@ -92,9 +96,9 @@ class MainActivity2 : AppCompatActivity() {
                 )
             val temp = main.getString("temp").toFloat().toInt().toString() +"°C"
             val tempMin =
-                "Min Temp: " + main.getString("temp_min").toFloat().toInt().toString() + "°C"
+                "Min: " + main.getString("temp_min").toFloat().toInt().toString() + "°C"
             val tempMax =
-                "Max Temp: " + main.getString("temp_max").toFloat().toInt().toString() + "°C"
+                "Max: " + main.getString("temp_max").toFloat().toInt().toString() + "°C"
             val humidity = main.getString("humidity") + "%"
             val windSpeed = wind.getString("speed") + "km/h"
             val weatherDescription = weather.getString("description")
@@ -113,8 +117,7 @@ class MainActivity2 : AppCompatActivity() {
             findViewById<TextView>(R.id.feucht).text = humidity
             findViewById<TextView>(R.id.wind).text = windSpeed
             findViewById<TextView>(R.id.regen).text = rainPCP
-
-            findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
+*/
             findViewById<TextView>(R.id.errorText).visibility = View.GONE
             findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
         } catch (e: Exception) {
@@ -125,17 +128,15 @@ class MainActivity2 : AppCompatActivity() {
 
 
     private fun handleNetworkError() {
-        findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
         findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
         findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.GONE
 
     }//fun handleNetworkError
 
     private fun handleDataParsingError() {
-        findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
         findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
         findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.GONE
-        findViewById<LinearLayout>(R.id.search_bar).visibility = View.VISIBLE
+
     }//fun handleDataParsingError()
 
 }//class MainActivity2
